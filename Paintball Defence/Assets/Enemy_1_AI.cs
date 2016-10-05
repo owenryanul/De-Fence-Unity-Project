@@ -3,17 +3,22 @@ using System.Collections;
 
 public class Enemy_1_AI : MonoBehaviour {
 
-	//public Transform EnemyBullet;
+    //public Transform EnemyBullet;
+    public GameObject Corpse;
 	//private float bulletCooldown;
 	// Use this for initialization
+    private float topSpeed;
+    private float speed;
 	void Start () {
-		//bulletCooldown = 5;
+        //bulletCooldown = 5;
+        topSpeed = 1.0f;
+        speed = topSpeed;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		float speed = 1.0f;
+		//float speed = topSpeed;
 
 		GameObject[] targets = GameObject.FindGameObjectsWithTag ("Friendly");
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
@@ -50,4 +55,28 @@ public class Enemy_1_AI : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+
+    void OnTriggerStay(Collider col)
+    {
+        if(col.gameObject.tag == "Corpse")
+        {
+            speed = topSpeed / 2;
+        }     
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Corpse")
+        {
+            speed = topSpeed;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if(Random.Range(0, 5) <= 3)
+        {
+            Instantiate(Corpse, this.transform.position, Corpse.transform.rotation);
+        }
+    }
 }

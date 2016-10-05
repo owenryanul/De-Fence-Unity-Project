@@ -4,18 +4,23 @@ using System.Collections;
 public class Enemy2_Behaviour : MonoBehaviour {
 
 	public GameObject enemyBlastEmmitter;
+    public GameObject Corpse;
 	private float blastCountdown;
+    private float speed;
+    private float topSpeed;
 	private bool blasting;
 	// Use this for initialization
 	void Start () {
 		blastCountdown = 5;
 		blasting = false;
+        topSpeed = 1.0f;
+        speed = topSpeed;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		float speed = 1.0f;
+		//float speed = 1.0f;
 		Vector3 playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;
 
 		if (!blasting) 
@@ -57,4 +62,29 @@ public class Enemy2_Behaviour : MonoBehaviour {
 			blasting = true;
 		}
 	}
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Corpse")
+        {
+            speed = topSpeed / 2;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Corpse")
+        {
+            speed = topSpeed;
+        }
+    }
+
+
+    void OnDestroy()
+    {
+        if (Random.Range(0, 5) <= 3)
+        {
+            Instantiate(Corpse, this.transform.position, Corpse.transform.rotation);
+        }
+    }
 }

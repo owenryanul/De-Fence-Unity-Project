@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\BuildIndicator.cs" />
      <Compile Include="Assets\Bullet_Move.cs" />
+     <Compile Include="Assets\Corpse_Collide.cs" />
      <Compile Include="Assets\Cover_Placed.cs" />
      <Compile Include="Assets\EmitterRemoveOnDone.cs" />
      <Compile Include="Assets\Enemy2_Behaviour.cs" />
