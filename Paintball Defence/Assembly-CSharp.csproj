@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\BuildIndicator.cs" />
      <Compile Include="Assets\Bullet_Move.cs" />
+     <Compile Include="Assets\Bullet_Move_2.cs" />
      <Compile Include="Assets\Corpse_Collide.cs" />
      <Compile Include="Assets\Cover_Placed.cs" />
      <Compile Include="Assets\EmitterRemoveOnDone.cs" />
@@ -76,6 +77,7 @@
      <Compile Include="Assets\SpawnEnemies.cs" />
      <Compile Include="Assets\UI_BuildIndicator.cs" />
      <Compile Include="Assets\UI_FiringModeIndicator.cs" />
+     <Compile Include="Assets\UI_Weapon_Indicator.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
