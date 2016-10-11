@@ -59,33 +59,40 @@ public class Bullet_Move : MonoBehaviour {
 
 
 
-	void OnTriggerEnter(Collider col)
-	{
-		//print("collision in");
-		if (col.tag == "Enemy") 
-		{
-			Instantiate (enemyDeathEmmiter, col.gameObject.transform.position, new Quaternion(0, 180, 180 , 0));
-			Destroy (col.gameObject);
-			Destroy (this.gameObject);
-		}
+    void OnTriggerEnter(Collider col)
+    {
+        //print("collision in");
+        if (col.tag == "Enemy")
+        {
+            Instantiate(enemyDeathEmmiter, col.gameObject.transform.position, new Quaternion(0, 180, 180, 0));
+            Destroy(col.gameObject);
+            Destroy(this.gameObject);
+        }
 
-		if (col.tag == "Cover_Barrier") 
-		{
-			bool ignorethisCollision = false;
-			foreach (GameObject acover in coverToIgnore) 
-			{
-				if (acover.name == col.gameObject.name) 
-				{
-					//print("ignoring this collision");
-					ignorethisCollision = true;
-					break;
-				}
-			}
+        if (col.tag == "Cover_Barrier")
+        {
+            if (coverToIgnore.Count != 0)
+            {
+                bool ignorethisCollision = false;
+                foreach (GameObject acover in coverToIgnore)
+                {
+                    if (acover.name == col.gameObject.name)
+                    {
+                        //print("ignoring this collision");
+                        ignorethisCollision = true;
+                        break;
+                    }
+                }
 
-			if (!ignorethisCollision) 
-			{
-				Destroy (this.gameObject);
-			}
-		}
-	}
+                if (!ignorethisCollision)
+                {
+                    Destroy(this.gameObject);
+                }
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }

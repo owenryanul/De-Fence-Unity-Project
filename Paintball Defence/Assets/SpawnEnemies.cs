@@ -8,11 +8,18 @@ public class SpawnEnemies : MonoBehaviour {
     public GameObject enemy_shooter;
 	private float spawncooldown;
 	private float mobCooldown;
+    private bool spawningMob;
+    private int mobMembersYetToSpawn;
+    private float mobMemberCooldown;
+    private Vector3 mobSpawnpoint;
 
 	// Use this for initialization
 	void Start () {
-		spawncooldown = 5;
+		spawncooldown = 6;
 		mobCooldown = 5;
+        mobMembersYetToSpawn = 5;
+        mobMemberCooldown = 2;
+        spawningMob = false;
 	}
 	
 	// Update is called once per frame
@@ -29,17 +36,39 @@ public class SpawnEnemies : MonoBehaviour {
                     spawnpoint = new Vector3(Random.Range(-14, 14), Random.Range(-14, 14), -1);
                 }
 
-                if (mobCooldown < 1)
+                if (mobCooldown <= 0)//spawn a mob of basic enemies
                 {
-                    print("Enemy Mob Spawned");
-                    Instantiate(enemy, spawnpoint, enemy.transform.rotation);
-                    Instantiate(enemy, spawnpoint + new Vector3(1.5f, 1.5f, 0), enemy.transform.rotation);
-                    Instantiate(enemy, spawnpoint + new Vector3(-1.5f, 1.5f, 0), enemy.transform.rotation);
-                    Instantiate(enemy, spawnpoint + new Vector3(1.5f, -1.5f, 0), enemy.transform.rotation);
-                    Instantiate(enemy, spawnpoint + new Vector3(-1.5f, -1.5f, 0), enemy.transform.rotation);
-                    mobCooldown = 5;
+                    if (spawningMob)
+                    {
+                        if (mobMemberCooldown <= 0)
+                        {
+                            if (mobMembersYetToSpawn > 0)//spawn individual members of the mob with a 1 second delay
+                            {
+                                print("Enemy Mob Spawned");
+                                Instantiate(enemy, mobSpawnpoint, enemy.transform.rotation);
+                                mobMemberCooldown = 2;
+                                mobMembersYetToSpawn--;
+                            }
+                            else//finish spawning the mob and return to normal spawning routine
+                            {
+                                mobCooldown = 5;
+                                mobMembersYetToSpawn = 5;
+                                spawningMob = false;
+                                spawncooldown = 5;
+                            }
+                        }
+                        else
+                        {
+                            mobMemberCooldown -= Time.deltaTime;
+                        }
+                    }
+                    else//start the mob spawning routine
+                    {
+                        spawningMob = true;
+                        mobSpawnpoint = spawnpoint;
+                    }
                 }
-                else
+                else//spawn random type of enemy
                 {
                     int thing = Random.Range(0, 3);//Documentation says max inclusive, but is acting exclusive
                     print(thing);
@@ -63,9 +92,10 @@ public class SpawnEnemies : MonoBehaviour {
                             mobCooldown--;
                             break;
                     }
+                    spawncooldown = 5;
 
                 }
-                spawncooldown = 5;
+                
             }
 		}
 		else 
