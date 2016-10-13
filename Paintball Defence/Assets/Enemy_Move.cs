@@ -85,6 +85,7 @@ public class Enemy_Move : MonoBehaviour {
 
     void OnDestroy()
     {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Score>().addScore(100);
         if (Random.Range(0, 5) <= 3)
         {
             Instantiate(Corpse, this.transform.position, Corpse.transform.rotation);

@@ -28,4 +28,9 @@ public class UI_BuildIndicator : MonoBehaviour {
     {
         this.GetComponent<Text>().text = "Ammo: " + inAmmoCount;
     }
+
+    public void setScoreIndicator(int inScore)
+    {
+        this.GetComponent<Text>().text = "Score: " + inScore;
+    }
 }

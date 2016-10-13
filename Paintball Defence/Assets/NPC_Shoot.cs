@@ -7,10 +7,12 @@ public class NPC_Shoot : MonoBehaviour {
 	private bool isFollower;
 	private float shotCooldown;
 	private Collider LevelBounds;
+    private float scoreCooldown;
 
 	// Use this for initialization
 	void Start () {
 		shotCooldown = 5;
+        scoreCooldown = 5;
 		isFollower = false;
 		LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
 		print("npc created");
@@ -56,6 +58,18 @@ public class NPC_Shoot : MonoBehaviour {
 				}
 			}
 		}
+
+        //generate points
+        if(scoreCooldown <= 0)
+        {
+            scoreCooldown = 5;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Score>().addScore(10);
+            PopupText_Controller.createPistollerScorePopup(this.transform);
+        }
+        else
+        {
+            scoreCooldown -= Time.deltaTime;
+        }
 	}
 
 	void updateFollower()
