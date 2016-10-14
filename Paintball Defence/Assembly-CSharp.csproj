@@ -61,6 +61,7 @@
      <Compile Include="Assets\Fence_Break.cs" />
      <Compile Include="Assets\GhostCoverFaceMouse.cs" />
      <Compile Include="Assets\HideShowCoverBox.cs" />
+     <Compile Include="Assets\MainMenu_LevelSelectButton.cs" />
      <Compile Include="Assets\NPCBullet_Move.cs" />
      <Compile Include="Assets\NPC_Bullet_Move_Spread.cs" />
      <Compile Include="Assets\NPC_Death.cs" />

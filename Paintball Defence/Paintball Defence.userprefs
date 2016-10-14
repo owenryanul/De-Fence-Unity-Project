@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Player_Shoot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PopupText_Controller.cs">
     <Files>
       <File FileName="Assets\NPC_Bullet_Move_Spread.cs" Line="1" Column="1" />
       <File FileName="Assets\NPC_F_Bullet_Move.cs" Line="1" Column="1" />
@@ -8,6 +8,7 @@
       <File FileName="Assets\NPCBullet_Move.cs" Line="1" Column="1" />
       <File FileName="Assets\Fence_Break.cs" Line="1" Column="1" />
       <File FileName="Assets\Player_Shoot.cs" Line="1" Column="1" />
+      <File FileName="Assets\PopupText_Controller.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
