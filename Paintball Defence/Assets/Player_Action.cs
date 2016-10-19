@@ -118,6 +118,8 @@ public class Player_Action : MonoBehaviour {
                     case 2:
                         flamerthrowerAmmo += 100;
                         GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                        this.gameObject.GetComponent<Player_Score>().addScore(-100);
+                        PopupText_Controller.createCostPopup(this.transform, 100);
                         break;
                 }
             }
