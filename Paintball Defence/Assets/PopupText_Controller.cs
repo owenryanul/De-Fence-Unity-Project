@@ -35,6 +35,18 @@ public class PopupText_Controller : MonoBehaviour {
         //note: popup text will not display AT ALL if the rect transform is too small to fit the text.
     }
 
+    public static void createCostPopup(Vector3 location, int cost)
+    {
+        GameObject instance = (GameObject)Instantiate(costPopup);
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(location);
+        instance.transform.SetParent(canvas.transform, false);
+        instance.transform.position = screenPosition;
+        string atext = "-" + cost;
+        Animator aAnimator = instance.GetComponentInChildren<Animator>();
+        aAnimator.GetComponent<Text>().text = atext;
+        //note: popup text will not display AT ALL if the rect transform is too small to fit the text.
+    }
+
     /*public static void createPistollerScorePopup(Transform location, Canvas canvasIn)
     {
         GameObject instance = (GameObject)Instantiate(pistollerScorePopup);

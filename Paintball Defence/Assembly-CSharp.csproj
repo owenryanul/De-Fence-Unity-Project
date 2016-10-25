@@ -81,6 +81,7 @@
      <Compile Include="Assets\SpawnEnemies.cs" />
      <Compile Include="Assets\UI_BuildIndicator.cs" />
      <Compile Include="Assets\UI_FiringModeIndicator.cs" />
+     <Compile Include="Assets\UI_InsufficentFunds.cs" />
      <Compile Include="Assets\UI_Score_Indicator.cs" />
      <Compile Include="Assets\UI_Weapon_Indicator.cs" />
      <Compile Include="Assets\setupLevel.cs" />

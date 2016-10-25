@@ -78,33 +78,89 @@ public class Player_Action : MonoBehaviour {
                     case 2:
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
-                            Instantiate(NPC_F_Pistoller, targetVector, NPC_F_Pistoller.transform.rotation);
+                            if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                            {
+                                Instantiate(NPC_F_Pistoller, targetVector, NPC_F_Pistoller.transform.rotation);
+                                this.gameObject.GetComponent<Player_Score>().addScore(-300);
+                                PopupText_Controller.createCostPopup(targetVector, 300);
+                            }
+                            else
+                            {
+                                GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            }
                         }
                         else
                         {
-                            Instantiate(NPC_Pistoller, targetVector, NPC_Pistoller.transform.rotation);
+                            if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                            {
+                                Instantiate(NPC_Pistoller, targetVector, NPC_Pistoller.transform.rotation);
+                                this.gameObject.GetComponent<Player_Score>().addScore(-300);
+                                PopupText_Controller.createCostPopup(targetVector, 300);
+                            }
+                            else
+                            {
+                                GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            }
                         }
                         break;
 
                     case 3:
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
-                            Instantiate(NPC_F_MachineGunner, targetVector, NPC_F_MachineGunner.transform.rotation);
+                            
+                            if (this.gameObject.GetComponent<Player_Score>().getScore() >= 800)
+                            {
+                                Instantiate(NPC_F_MachineGunner, targetVector, NPC_F_MachineGunner.transform.rotation);
+                                this.gameObject.GetComponent<Player_Score>().addScore(-800);
+                                PopupText_Controller.createCostPopup(targetVector, 800);
+                            }
+                            else
+                            {
+                                GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            }
                         }
                         else
                         {
-                            Instantiate(NPC_MachineGunner, targetVector, NPC_MachineGunner.transform.rotation);
+                            if (this.gameObject.GetComponent<Player_Score>().getScore() >= 800)
+                            {
+                                Instantiate(NPC_MachineGunner, targetVector, NPC_MachineGunner.transform.rotation);
+                                this.gameObject.GetComponent<Player_Score>().addScore(-800);
+                                PopupText_Controller.createCostPopup(targetVector, 800);
+                            }
+                            else
+                            {
+                                GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            }
                         }
                         break;
 
                     case 4:
-                        currentGhost = (GameObject)Instantiate(GhostBarricade, targetVector, GhostBarricade.transform.rotation);
-                        currentlyBuilding = true;
+                        
+                        if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                        {
+                            currentGhost = (GameObject)Instantiate(GhostBarricade, targetVector, GhostBarricade.transform.rotation);
+                            currentlyBuilding = true;
+                            this.gameObject.GetComponent<Player_Score>().addScore(-300);
+                            PopupText_Controller.createCostPopup(targetVector, 300);
+                        }
+                        else
+                        {
+                            GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                        }
                         break;
 
                     case 5:
-                        currentGhost = (GameObject)Instantiate(GhostWall, targetVector, GhostWall.transform.rotation);
-                        currentlyBuilding = true;
+                        if (this.gameObject.GetComponent<Player_Score>().getScore() >= 500)
+                        {
+                            currentGhost = (GameObject)Instantiate(GhostWall, targetVector, GhostWall.transform.rotation);
+                            currentlyBuilding = true;
+                            this.gameObject.GetComponent<Player_Score>().addScore(-500);
+                            PopupText_Controller.createCostPopup(targetVector, 500);
+                        }
+                        else
+                        {
+                            GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                        }
                         break;
                 }
             }
@@ -116,10 +172,17 @@ public class Player_Action : MonoBehaviour {
                             
                         break;
                     case 2:
-                        flamerthrowerAmmo += 100;
-                        GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
-                        this.gameObject.GetComponent<Player_Score>().addScore(-100);
-                        PopupText_Controller.createCostPopup(this.transform, 100);
+                        if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                        {
+                            flamerthrowerAmmo += 100;
+                            GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                            this.gameObject.GetComponent<Player_Score>().addScore(-300);
+                            PopupText_Controller.createCostPopup(this.transform, 300);
+                        }
+                        else
+                        {
+                            GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                        }
                         break;
                 }
             }
@@ -179,48 +242,7 @@ public class Player_Action : MonoBehaviour {
 
 
 
-        if (hotbar == 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("None");
-                buildMode = 1;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Pistoller");
-                buildMode = 2;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Machine Gunner");
-                buildMode = 3;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Barricade");
-                buildMode = 4;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Wall");
-                buildMode = 5;
-            }
-        }
-        else if(hotbar == 1)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Rifle");
-                currentWeapon = 1;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Flamethrower");
-                GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
-                currentWeapon = 2;
-            }
-        }
+        updateUIHotbar();
 
     }
 
@@ -235,4 +257,97 @@ public class Player_Action : MonoBehaviour {
     {
         return firingMode;
     }
+
+    private void updateUIHotbar()
+    {
+        if (hotbar == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                buildMode = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                buildMode = 2;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+               buildMode = 3;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                buildMode = 4;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                buildMode = 5;
+            }
+            else if(Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                if(buildMode < 5)//!!!!!!!Update this as more things are added
+                {
+                    buildMode++;
+                }
+            }
+            else if(Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                if(buildMode > 1)
+                {
+                    buildMode--;
+                }
+            }
+        }
+        else if (hotbar == 1)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                currentWeapon = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+               currentWeapon = 2;
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                if (currentWeapon < 2)//!!!!!!!Update this as more things are added
+                {
+                    currentWeapon++;
+                }
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                if (currentWeapon > 1)
+                {
+                    currentWeapon--;
+                }
+            }
+        }
+
+        
+
+
+        if (hotbar == 0)
+        {
+            switch (buildMode)
+            {
+                case 1: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("None"); break;
+                case 2: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Pistoller (300)"); break;
+                case 3: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Machine Gunner (800)"); break;
+                case 4: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Barricade (300)"); break;
+                case 5: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setBuildIndicator("Wall (500)"); break;
+            }
+        }
+        else if (hotbar == 1)
+        {
+            switch(currentWeapon)
+            {
+                case 1: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Rifle"); break;
+                case 2:
+                    GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Flamethrower (100)");
+                    GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                    break;
+            }
+        }
+    }
+
 }
