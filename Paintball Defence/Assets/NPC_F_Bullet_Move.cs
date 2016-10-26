@@ -86,7 +86,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 
-		if (col.tag == "Cover_Barrier") 
+		if (col.tag == "Cover_Barrier" || col.tag == "EnemyTank_Barrier") 
 		{
 			bool ignorethisCollision = false;
 			foreach (GameObject acover in coverToIgnore) 

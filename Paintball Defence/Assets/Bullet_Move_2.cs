@@ -70,7 +70,7 @@ public class Bullet_Move_2 : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
-        if (col.tag == "Cover_Barrier")
+        if (col.tag == "Cover_Barrier" || col.tag == "EnemyTank_Barrier")
         {
             if (coverToIgnore.Count != 0)
             {

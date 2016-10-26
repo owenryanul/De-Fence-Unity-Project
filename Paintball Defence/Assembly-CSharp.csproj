@@ -58,6 +58,7 @@
      <Compile Include="Assets\Enemy_CollideWithBullet.cs" />
      <Compile Include="Assets\Enemy_Move.cs" />
      <Compile Include="Assets\Enemy_Tank_AI.cs" />
+     <Compile Include="Assets\Exit_To_Menu.cs" />
      <Compile Include="Assets\Fence_Break.cs" />
      <Compile Include="Assets\GhostCoverFaceMouse.cs" />
      <Compile Include="Assets\HideShowCoverBox.cs" />
