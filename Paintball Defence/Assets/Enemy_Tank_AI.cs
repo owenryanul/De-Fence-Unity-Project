@@ -7,7 +7,10 @@ public class Enemy_Tank_AI : MonoBehaviour {
     //private float bulletCooldown;
     // Use this for initialization
 
+    //!! NOTE: Barrier destruction logic is contained within a script attached to the barrier part of the tank frame
+
     public GameObject deathEmitter;
+    public GameObject coverDestroyedEmitter;
     private int PushersRemaining;
 
     void Start()
@@ -84,6 +87,11 @@ public class Enemy_Tank_AI : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
+        }
+        else if(col.gameObject.tag == "Cover_Barrier")
+        {
+            Instantiate(coverDestroyedEmitter, col.transform.position, this.transform.rotation);
+            Destroy(col.gameObject);
         }
     }
 }

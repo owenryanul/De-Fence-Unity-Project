@@ -4,7 +4,6 @@ using System.Collections;
 public class Enemy2_Behaviour : MonoBehaviour {
 
 	public GameObject enemyBlastEmmitter;
-    public GameObject Corpse;
 	private float blastCountdown;
     private float speed;
     private float topSpeed;
@@ -79,12 +78,4 @@ public class Enemy2_Behaviour : MonoBehaviour {
         }
     }
 
-
-    void OnDestroy()
-    {
-        if (Random.Range(0, 5) <= 3)
-        {
-            Instantiate(Corpse, this.transform.position, Corpse.transform.rotation);
-        }
-    }
 }

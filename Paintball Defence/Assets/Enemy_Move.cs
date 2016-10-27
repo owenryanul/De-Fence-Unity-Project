@@ -4,7 +4,6 @@ using System.Collections;
 public class Enemy_Move : MonoBehaviour {
 
 	public GameObject EnemyBullet;
-    public GameObject Corpse;
 	private float bulletCooldown;
 	private float spitCooldown;
     private float speed;
@@ -79,16 +78,6 @@ public class Enemy_Move : MonoBehaviour {
         if (col.gameObject.tag == "Corpse")
         {
             speed = topSpeed;
-        }
-    }
-
-
-    void OnDestroy()
-    {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Score>().addScore(100);
-        if (Random.Range(0, 5) <= 3)
-        {
-            Instantiate(Corpse, this.transform.position, Corpse.transform.rotation);
         }
     }
 }

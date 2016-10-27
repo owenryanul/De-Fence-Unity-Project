@@ -4,7 +4,6 @@ using System.Collections;
 public class Enemy_1_AI : MonoBehaviour {
 
     //public Transform EnemyBullet;
-    public GameObject Corpse;
 	//private float bulletCooldown;
 	// Use this for initialization
     private float topSpeed;
@@ -72,11 +71,4 @@ public class Enemy_1_AI : MonoBehaviour {
         }
     }
 
-    void OnDestroy()
-    {
-        if(Random.Range(0, 5) <= 3)
-        {
-            Instantiate(Corpse, this.transform.position, Corpse.transform.rotation);
-        }
-    }
 }

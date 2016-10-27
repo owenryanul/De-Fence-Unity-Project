@@ -17,7 +17,7 @@ public class NPC_Death : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.tag == "Enemy" || col.tag == "EnemyBullet") 
+		if (col.tag == "Enemy" || col.tag == "EnemyBullet" || col.tag == "EnemyTank") 
 		{
 			Destroy (this.gameObject);
 			Instantiate (deathParticleEmmiter, this.transform.position, this.transform.rotation);
