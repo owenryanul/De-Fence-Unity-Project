@@ -4,16 +4,18 @@ using System.Collections;
 public class Enemy_Move : MonoBehaviour {
 
 	public GameObject EnemyBullet;
-	private float bulletCooldown;
+	private float AimingTimeRemaining;
 	private float spitCooldown;
     private float speed;
     private float topSpeed;
+    private float maxRange;
 	// Use this for initialization
 	void Start () {
-		bulletCooldown = 5;
+		AimingTimeRemaining = 3;
 		spitCooldown = 5;
         topSpeed = 1.0f;
         speed = topSpeed;
+        maxRange = 12;
 	}
 	
 	// Update is called once per frame
@@ -33,16 +35,16 @@ public class Enemy_Move : MonoBehaviour {
 		}
 
 
-		if ((ClosestTarget.transform.position - this.gameObject.transform.position).magnitude < 5 && spitCooldown < 1) {
+		if ((ClosestTarget.transform.position - this.gameObject.transform.position).magnitude < maxRange && spitCooldown < 1) {
 			this.transform.LookAt(ClosestTarget.transform.position);
-			if (bulletCooldown <= 0) {
+			if (AimingTimeRemaining <= 0) {
 				//print ("Firing");
-				bulletCooldown = 5;
+				AimingTimeRemaining = 3;
 				spitCooldown = 5;
 				Instantiate (EnemyBullet, this.transform.position, this.transform.rotation);
 			} else {
 				//print ("Aiming");
-				bulletCooldown -= Time.deltaTime;
+				AimingTimeRemaining -= Time.deltaTime;
 			}
 		}
 		else

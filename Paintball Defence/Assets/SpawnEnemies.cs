@@ -15,7 +15,7 @@ public class SpawnEnemies : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spawncooldown = 6;
+		spawncooldown = ((10 / GameObject.FindGameObjectsWithTag("SpawnPoint").Length) + 1);
 		mobCooldown = 5;
         mobMembersYetToSpawn = 5;
         mobMemberCooldown = 2;
@@ -92,7 +92,7 @@ public class SpawnEnemies : MonoBehaviour {
                             mobCooldown--;
                             break;
                     }
-                    spawncooldown = 5;
+                    spawncooldown = ((10 / GameObject.FindGameObjectsWithTag("SpawnPoint").Length) + 1);
 
                 }
                 

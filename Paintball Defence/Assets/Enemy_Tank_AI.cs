@@ -11,6 +11,7 @@ public class Enemy_Tank_AI : MonoBehaviour {
 
     public GameObject deathEmitter;
     public GameObject coverDestroyedEmitter;
+    public int TankType; //1 for normal, 2 for shooter tank
     private int PushersRemaining;
 
     void Start()
@@ -24,11 +25,18 @@ public class Enemy_Tank_AI : MonoBehaviour {
     {
         PushersRemaining = 0;
         float speed = 0.5f;
-        if(this.transform.FindChild("Tank Rider 1"))
+        switch (TankType)
+        {
+            case 1: speed = 0.5f; break;
+            case 2: speed = 0.2f; break;
+            default: print("Error: Tank type not set."); break;
+        }
+
+        if (this.transform.FindChild("Tank Rider 1") || this.transform.FindChild("Tank Gunner 1"))
         {
             PushersRemaining++;
         }
-        if (this.transform.FindChild("Tank Rider 2"))
+        if (this.transform.FindChild("Tank Rider 2") || this.transform.FindChild("Tank Gunner 2"))
         {
             PushersRemaining++;
         }

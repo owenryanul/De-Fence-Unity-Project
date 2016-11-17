@@ -5,6 +5,7 @@ public class Fence_Break : MonoBehaviour {
 
 	private float FenceBreakCountdown;
     public GameObject tank;
+    public GameObject shooterTank;
 	public GameObject brokenFence;
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,11 @@ public class Fence_Break : MonoBehaviour {
                 //Create tank that broke the fence and have it face the centre
                 Quaternion rotationOfTank = tank.transform.rotation;
                 rotationOfTank.SetLookRotation((new Vector3(0, 0, -1)) - fenceToBreak.transform.position, new Vector3(0, 0, -1));
+                switch (Random.Range(0, 4))
+                {
+                    case 1: Instantiate(shooterTank, fenceToBreak.transform.position, rotationOfTank); break;
+                    default: Instantiate(tank, fenceToBreak.transform.position, rotationOfTank); break;
+                }
                 Instantiate(tank, fenceToBreak.transform.position, rotationOfTank);
 
                 //Destory the fence we're removing

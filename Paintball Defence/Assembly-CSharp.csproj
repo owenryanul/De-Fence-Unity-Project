@@ -57,7 +57,9 @@
      <Compile Include="Assets\Enemy_Bullet_Move.cs" />
      <Compile Include="Assets\Enemy_CollideWithBullet.cs" />
      <Compile Include="Assets\Enemy_Death.cs" />
+     <Compile Include="Assets\Enemy_Gunner_AI.cs" />
      <Compile Include="Assets\Enemy_Move.cs" />
+     <Compile Include="Assets\Enemy_TankBullet_Move.cs" />
      <Compile Include="Assets\Enemy_Tank_AI.cs" />
      <Compile Include="Assets\Enemy_Tank_BarrierDamage.cs" />
      <Compile Include="Assets\Exit_To_Menu.cs" />
