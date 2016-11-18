@@ -28,9 +28,11 @@ public class Fence_Break : MonoBehaviour {
                 //Create tank that broke the fence and have it face the centre
                 Quaternion rotationOfTank = tank.transform.rotation;
                 rotationOfTank.SetLookRotation((new Vector3(0, 0, -1)) - fenceToBreak.transform.position, new Vector3(0, 0, -1));
-                switch (Random.Range(0, 4))
+                switch (Random.Range(0, 5))
                 {
-                    case 1: Instantiate(shooterTank, fenceToBreak.transform.position, rotationOfTank); break;
+                    case 0: break;
+                    case 1: break;
+                    case 2: Instantiate(shooterTank, fenceToBreak.transform.position, rotationOfTank); break;
                     default: Instantiate(tank, fenceToBreak.transform.position, rotationOfTank); break;
                 }
                 Instantiate(tank, fenceToBreak.transform.position, rotationOfTank);

@@ -15,7 +15,7 @@ public class SpawnEnemies : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spawncooldown = ((10 / GameObject.FindGameObjectsWithTag("SpawnPoint").Length) + 1);
+		spawncooldown = (10);
 		mobCooldown = 5;
         mobMembersYetToSpawn = 5;
         mobMemberCooldown = 2;

@@ -56,6 +56,7 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
         switch(level)
         {
             case 1: SceneManager.LoadScene("Test_Scene", LoadSceneMode.Single); break;
+            case 2: SceneManager.LoadScene("Level_2", LoadSceneMode.Single); break;
         }
     }
 }

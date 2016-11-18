@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Player_Death : MonoBehaviour {
@@ -17,7 +18,7 @@ public class Player_Death : MonoBehaviour {
         //print("Collision");
 		if (col.tag == "Enemy" || col.tag == "EnemyBullet" || col.tag == "EnemyTank") 
 		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene ("Test_Scene");
+			SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 		}
 	}
 }

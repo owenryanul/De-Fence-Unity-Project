@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy_Move : MonoBehaviour {
+public class Enemy_Shooter_AI: MonoBehaviour {
 
 	public GameObject EnemyBullet;
 	private float AimingTimeRemaining;
