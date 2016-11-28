@@ -4,6 +4,7 @@ using System.Collections;
 public class Enemy_Shooter_AI: MonoBehaviour {
 
 	public GameObject EnemyBullet;
+    public bool isTargetDummy;
 	private float AimingTimeRemaining;
 	private float spitCooldown;
     private float speed;
@@ -13,7 +14,14 @@ public class Enemy_Shooter_AI: MonoBehaviour {
 	void Start () {
 		AimingTimeRemaining = 3;
 		spitCooldown = 5;
-        topSpeed = 1.0f;
+        if (isTargetDummy)
+        {
+            topSpeed = 0;//immoblises the shooter if its a target dummy.
+        }
+        else
+        {
+            topSpeed = 1.0f;
+        }
         speed = topSpeed;
         maxRange = 12;
 	}

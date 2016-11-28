@@ -62,7 +62,7 @@ public class NPC_Shoot : MonoBehaviour {
         //generate points
         if(scoreCooldown <= 0)
         {
-            scoreCooldown = 5;
+            scoreCooldown = 1;
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Score>().addScore(10);
             PopupText_Controller.createPistollerScorePopup(this.transform);
         }

@@ -43,6 +43,11 @@ public class Popup_Kill : MonoBehaviour {
         this.transform.position -= move;
     }
 
+    public void nudgePopup(float amountToNudgeX, float amountToNudgeY)
+    {
+        this.transform.position = new Vector3(this.transform.position.x + amountToNudgeX, this.transform.position.y + amountToNudgeY, this.transform.position.z);
+    }
+
     void OnDestroy()
     {
         print("Popup killed");

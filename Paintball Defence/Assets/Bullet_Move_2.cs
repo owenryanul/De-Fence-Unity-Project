@@ -7,7 +7,8 @@ public class Bullet_Move_2 : MonoBehaviour {
     // Use this for initialization
     private Vector3 target;
     private Vector3 heading;
-    public float maxLifeTime;
+    public float maxLifeTime = 2;
+    public float spreadRange = 0;
     private float currentLifeTime;
     private float speed;
     private float currentspeed;
@@ -18,6 +19,7 @@ public class Bullet_Move_2 : MonoBehaviour {
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Action>().getTargetVector();
+        target = new Vector3(target.x + (Random.Range(-spreadRange, +spreadRange)), target.y + (Random.Range(-spreadRange, +spreadRange)), target.z);
 
 
         //maxLifeTime = 5;

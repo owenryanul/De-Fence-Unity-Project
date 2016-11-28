@@ -59,4 +59,14 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
             case 2: SceneManager.LoadScene("Level_2", LoadSceneMode.Single); break;
         }
     }
+
+    public void loadTutorial()
+    {
+        SceneManager.LoadScene("Level_Tutorial", LoadSceneMode.Single);
+    }
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
 }

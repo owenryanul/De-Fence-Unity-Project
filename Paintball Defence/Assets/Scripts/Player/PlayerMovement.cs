@@ -59,6 +59,11 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		this.transform.position += move;
 
+        foreach(GameObject aPopup in GameObject.FindGameObjectsWithTag("Score_Popup"))
+        {
+            aPopup.GetComponent<Popup_Kill>().nudgePopup(move.x, move.y);
+        }
+
 	}
 
 

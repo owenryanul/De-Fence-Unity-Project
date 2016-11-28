@@ -5,6 +5,8 @@ public class Enemy_Death : MonoBehaviour {
 
     public GameObject corpse;
     public GameObject enemyDeathEmiter;
+    public bool isTargetDummy = false;
+    public GameObject targetDummy;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,10 @@ public class Enemy_Death : MonoBehaviour {
         }
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Score>().addScore(100);
         Instantiate(enemyDeathEmiter, this.gameObject.transform.position, new Quaternion(0, 180, 180, 0));
+        if(isTargetDummy)
+        {
+            Instantiate(targetDummy, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        }
         Destroy(this.gameObject);
     }
 }

@@ -5,6 +5,7 @@ public class Player_Action : MonoBehaviour {
 
     public GameObject PlayerBullet;
     public GameObject PlayerFlamethrowerBullet;
+    public GameObject PlayerShotgunBullet;
 
     public GameObject Barricade;
     public GameObject Wall;
@@ -27,6 +28,7 @@ public class Player_Action : MonoBehaviour {
 
     private float shotCooldown;
     private int flamerthrowerAmmo;
+    private int shotgunAmmo;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,7 @@ public class Player_Action : MonoBehaviour {
         firingMode = 0; //0 for focused, 1 for parrallel
         shotCooldown = 1;
         flamerthrowerAmmo = 0;
+        shotgunAmmo = 0;
 	}
 	
 	// Update is called once per frame
@@ -53,17 +56,29 @@ public class Player_Action : MonoBehaviour {
         {
             switch (currentWeapon)
             {
-                case 1: 
+                case 1: //shooting rifle
                     Instantiate(PlayerBullet, this.transform.position, PlayerBullet.transform.rotation);
-                    shotCooldown = 1;
+                    shotCooldown = 0.5f;
                     break;
-                case 2:
+                case 2: //shooting flamethrower
                     if (flamerthrowerAmmo > 0)
                     {
                         Instantiate(PlayerFlamethrowerBullet, this.transform.position, PlayerBullet.transform.rotation);
                         shotCooldown = 0.01f;
                         flamerthrowerAmmo--;
                         GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                    }
+                    break;
+                case 3: //shooting shotgun
+                    if (shotgunAmmo > 0)
+                    {
+                        for (int i = 0; i < 8; i++)
+                        {
+                            Instantiate(PlayerShotgunBullet, this.transform.position, PlayerBullet.transform.rotation);
+                        }
+                        shotCooldown = 1f;
+                        shotgunAmmo--;
+                        GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + shotgunAmmo);
                     }
                     break;
             }
@@ -164,20 +179,37 @@ public class Player_Action : MonoBehaviour {
                         break;
                 }
             }
-            else if (hotbar == 1)
+            else if (hotbar == 1)//weapon hotbar
             {
                 switch(currentWeapon)
                 {
                     case 1:
-                            
+                            //rifle, basic starting weapon
                         break;
                     case 2:
-                        if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                        //flamethrower ammo purchasing
+                            if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                            {
+                                flamerthrowerAmmo += 100;
+                                GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                                this.gameObject.GetComponent<Player_Score>().addScore(-300);
+                                PopupText_Controller.createCostPopup(this.transform, 300);
+                                print("Flamer ammo purchased, new ammo: " + flamerthrowerAmmo + ", new score: " + this.gameObject.GetComponent<Player_Score>().getScore());
+                            }
+                            else
+                            {
+                                GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            }
+                        break;
+                    case 3:
+                        //shotgun ammo purchasing
+                        if (this.gameObject.GetComponent<Player_Score>().getScore() >= 200)
                         {
-                            flamerthrowerAmmo += 100;
-                            GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
-                            this.gameObject.GetComponent<Player_Score>().addScore(-300);
-                            PopupText_Controller.createCostPopup(this.transform, 300);
+                            shotgunAmmo += 10;
+                            GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + shotgunAmmo);
+                            this.gameObject.GetComponent<Player_Score>().addScore(-200);
+                            PopupText_Controller.createCostPopup(this.transform, 200);
+                            print("Shotgun ammo purchased, new ammo: " + shotgunAmmo + ", new score: " + this.gameObject.GetComponent<Player_Score>().getScore());
                         }
                         else
                         {
@@ -193,13 +225,13 @@ public class Player_Action : MonoBehaviour {
             //print("Building " + buildMode);
             switch(buildMode)
             {
-                case 4:
+                case 4://placing barricade, showing ghost
                     //print("starting to Building");
                     Instantiate(Barricade, currentGhost.transform.position, currentGhost.transform.rotation);
                     //print("Finished Building");
                         break;
 
-                case 5:
+                case 5: //placing wall, showing ghost
                     Instantiate(Wall, currentGhost.transform.position, currentGhost.transform.rotation);
                     break;
             }
@@ -307,9 +339,13 @@ public class Player_Action : MonoBehaviour {
             {
                currentWeapon = 2;
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                currentWeapon = 3;
+            }
             else if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                if (currentWeapon < 2)//!!!!!!!Update this as more things are added
+                if (currentWeapon < 3)//!!!!!!!Update this as more things are added
                 {
                     currentWeapon++;
                 }
@@ -343,8 +379,12 @@ public class Player_Action : MonoBehaviour {
             {
                 case 1: GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Rifle"); break;
                 case 2:
-                    GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Flamethrower (100)");
+                    GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Flamethrower (300)");
                     GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                    break;
+                case 3:
+                    GameObject.FindGameObjectWithTag("UI_SelectBuildIndicator").GetComponent<UI_BuildIndicator>().setWeaponIndicator("Shotgun (200)");
+                    GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + shotgunAmmo);
                     break;
             }
         }
