@@ -3,11 +3,12 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	private Collider LevelBounds;
+	private Collider[] LevelBounds;
 
 	// Use this for initialization
 	void Start () {
-		LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
+        LevelBounds = GameObject.FindGameObjectWithTag("Level").GetComponentsInChildren<BoxCollider>();
+		//LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
 	}
 		
 
@@ -20,43 +21,79 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKey(KeyCode.UpArrow)) 
 		{
 			move.y += speed;
-			if (!LevelBounds.bounds.Contains (new Vector3 (this.transform.position.x, this.transform.position.y + move.y, this.transform.position.z)))
-			{
-				print ("Up error");
-				move.y -= speed;
-			}
+            bool isInLevelBounds = false;
+            foreach (BoxCollider aCollider in LevelBounds)
+            {
+                if (aCollider.bounds.Contains(new Vector3(this.transform.position.x, this.transform.position.y + move.y, this.transform.position.z)))
+                {
+                    isInLevelBounds = true;
+                    break;   
+                }
+            }
+            if(!isInLevelBounds)
+            {
+                print("Unable to move player Up, out of level bounds");
+                move.y -= speed;
+            }
 		}
 		//move down
 		if (Input.GetKey(KeyCode.DownArrow)) 
 		{
 			move.y -= speed;
-			if (!LevelBounds.bounds.Contains (new Vector3 (this.transform.position.x, this.transform.position.y + move.y, this.transform.position.z)))
-			{
-				print ("Down error");
-				move.y += speed;
-			}
-		}
+            bool isInLevelBounds = false;
+            foreach (BoxCollider aCollider in LevelBounds)
+            {
+                if (aCollider.bounds.Contains(new Vector3(this.transform.position.x, this.transform.position.y + move.y, this.transform.position.z)))
+                {
+                    isInLevelBounds = true;
+                    break;
+                }
+            }
+            if (!isInLevelBounds)
+            {
+                print("Unable to move player Down, out of level bounds");
+                move.y += speed;
+            }
+        }
 		//move left
 		if (Input.GetKey(KeyCode.LeftArrow)) 
 		{
 			move.x -= speed;
-			if (!LevelBounds.bounds.Contains (new Vector3 (this.transform.position.x + move.x, this.transform.position.y, this.transform.position.z)))
-			{
-				print ("left error");
-				move.x += speed;
-			}
-		}
+            bool isInLevelBounds = false;
+            foreach (BoxCollider aCollider in LevelBounds)
+            {
+                if (aCollider.bounds.Contains(new Vector3(this.transform.position.x + move.x, this.transform.position.y, this.transform.position.z)))
+                {
+                    isInLevelBounds = true;
+                    break;
+                }
+            }
+            if (!isInLevelBounds)
+            {
+                print("Can't move Left, out of level bounds");
+                move.x += speed;
+            }
+        }
 
 		//move right
 		if (Input.GetKey(KeyCode.RightArrow)) 
 		{
-			move.x += speed;
-			if (!LevelBounds.bounds.Contains (new Vector3 (this.transform.position.x + move.x, this.transform.position.y, this.transform.position.z)))
-			{
-				print ("right error");
-				move.x -= speed;
-			}
-		}
+            move.x += speed;
+            bool isInLevelBounds = false;
+            foreach (BoxCollider aCollider in LevelBounds)
+            {
+                if (aCollider.bounds.Contains(new Vector3(this.transform.position.x + move.x, this.transform.position.y, this.transform.position.z)))
+                {
+                    isInLevelBounds = true;
+                    break;
+                }
+            }
+            if (!isInLevelBounds)
+            {
+                print("Unable to move player right, out of level bounds");
+                move.x -= speed;
+            }
+        }
 		this.transform.position += move;
 
         foreach(GameObject aPopup in GameObject.FindGameObjectsWithTag("Score_Popup"))

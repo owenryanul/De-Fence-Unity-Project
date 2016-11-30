@@ -79,7 +79,7 @@ public class Bullet_Move_2 : MonoBehaviour {
                 foreach (GameObject acover in coverToIgnore)
                 {
 
-                    if (acover.name == col.gameObject.name)
+                    if (acover.GetInstanceID() == col.gameObject.GetInstanceID())
                     {
                         //print("ignoring this collision");
                         ignorethisCollision = true;

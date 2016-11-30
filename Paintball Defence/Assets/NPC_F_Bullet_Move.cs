@@ -81,8 +81,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
 		print("collision in");
 		if (col.tag == "Enemy") 
 		{
-			Instantiate (enemyDeathEmmiter, col.gameObject.transform.position, new Quaternion(0, 180, 180 , 0));
-			Destroy (col.gameObject);
+            col.gameObject.GetComponent<Enemy_Death>().killEnemy();
 			Destroy (this.gameObject);
 		}
 
@@ -91,7 +90,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
 			bool ignorethisCollision = false;
 			foreach (GameObject acover in coverToIgnore) 
 			{
-				if (acover.name == col.gameObject.name) 
+				if (acover.GetInstanceID() == col.gameObject.GetInstanceID()) 
 				{
 					print("ignoring this collision");
 					ignorethisCollision = true;

@@ -71,7 +71,7 @@ public class EnemyBulletMove : MonoBehaviour {
 			bool ignorethisCollision = false;
 			foreach (GameObject acover in coverToIgnore) 
 			{
-				if (acover.name == col.gameObject.name) 
+				if (acover.GetInstanceID() == col.gameObject.GetInstanceID()) 
 				{
 					//print("ignoring this collision");
 					ignorethisCollision = true;

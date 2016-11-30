@@ -72,24 +72,26 @@ public class NPCBullet_Move : MonoBehaviour {
 		//print("collision in");
 		if (col.tag == "Enemy") 
 		{
-			Instantiate (enemyDeathEmmiter, col.gameObject.transform.position, new Quaternion(0, 180, 180 , 0));
-			Destroy (col.gameObject);
+            col.gameObject.GetComponent<Enemy_Death>().killEnemy();
 			Destroy (this.gameObject);
 		}
 
 		if (col.tag == "Cover_Barrier" || col.tag == "EnemyTank_Barrier") 
 		{
 			bool ignorethisCollision = false;
-			//!!!Note to self, if no cover exisits ignore.
-			foreach (GameObject acover in coverToIgnore) 
-			{
-				if (acover.name == col.gameObject.name) 
-				{
-					//print("ignoring this collision");
-					ignorethisCollision = true;
-					break;
-				}
-			}
+            //!!!Note to self, if no cover exisits ignore.
+            if (coverToIgnore.Count > 0)
+            {
+                foreach (GameObject acover in coverToIgnore)
+                {
+                    if (acover.GetInstanceID() == col.gameObject.GetInstanceID())
+                    {
+                        //print("ignoring this collision");
+                        ignorethisCollision = true;
+                        break;
+                    }
+                }
+            }
 
 			if (!ignorethisCollision) 
 			{

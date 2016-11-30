@@ -15,6 +15,7 @@ public class Bullet_Move : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //print("Player bullet spawned");
 		target = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player_Action>().getTargetVector();
 
 
@@ -39,6 +40,7 @@ public class Bullet_Move : MonoBehaviour {
 			{
 				//print ("adding cover area to ignore list");
 				coverToIgnore.Add(aCoverArea.transform.parent.GetChild(0).gameObject);//the barrier part of the cover.
+                //print("Cover to ignore added " + coverToIgnore[coverToIgnore.Count - 1].transform.parent.name);
 			}
 		}
 	}
@@ -75,9 +77,10 @@ public class Bullet_Move : MonoBehaviour {
                 bool ignorethisCollision = false;
                 foreach (GameObject acover in coverToIgnore)
                 {
-                    if (acover.name == col.gameObject.name)
+                    if (acover.GetInstanceID() == col.gameObject.GetInstanceID()) /*was comparing by name but copies have the same name
+                                                                                    despite the (1) attached to them in the editor.*/
                     {
-                        //print("ignoring this collision");
+                        //print("ignoring this collision with " + col.transform.parent.name);
                         ignorethisCollision = true;
                         break;
                     }
@@ -85,12 +88,12 @@ public class Bullet_Move : MonoBehaviour {
 
                 if (!ignorethisCollision)
                 {
-                    print("colliding");
+                    //print("colliding");
                     //if the barriers are not to be ignored due to the bullet source being close to them, then the bullet collides with the barrier and is destroyed.
                     //if the barrier is the barrier of a tank enemy, inflict damage on the barrier before destroying the bullet.
                     if (col.tag == "EnemyTank_Barrier")
                     {
-                        print("Detected Enemy Tank Barrier");
+                        //print("Detected Enemy Tank Barrier");
                         col.gameObject.GetComponent<Enemy_Tank_BarrierDamage>().damageBarrier();
                     }
                     Destroy(this.gameObject);
@@ -98,16 +101,17 @@ public class Bullet_Move : MonoBehaviour {
             }
             else
             {
-                print("colliding");
+                //print("colliding");
                 //if there are no barriers that not to be ignored due to the bullet source being close to them, then the bullet collides with the barrier and is destroyed.
                 //if the barrier is the barrier of a tank enemy, inflict damage on the barrier before destroying the bullet.
                 if (col.tag == "EnemyTank_Barrier")
                 {
-                    print("Detected Enemy Tank Barrier");
+                    //print("Detected Enemy Tank Barrier");
                     col.gameObject.GetComponent<Enemy_Tank_BarrierDamage>().damageBarrier();
                 }
                 Destroy(this.gameObject);
             }
         }
+
     }
 }
