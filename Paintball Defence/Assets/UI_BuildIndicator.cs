@@ -16,12 +16,12 @@ public class UI_BuildIndicator : MonoBehaviour {
 
 	public void setBuildIndicator (string inBuildName)
 	{
-		this.GetComponent<Text> ().text = "Build Selected: " + inBuildName;
+		this.GetComponent<Text> ().text = "Current Purchaseable: " + inBuildName;
 	}
 
     public void setWeaponIndicator(string inWeaponName)
     {
-        this.GetComponent<Text>().text = "Weapon Selected: " + inWeaponName;
+        this.GetComponent<Text>().text = "Current Weapon: " + inWeaponName;
     }
 
     public void setAmmoIndicator(string inAmmoCount)

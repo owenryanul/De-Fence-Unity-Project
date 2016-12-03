@@ -24,13 +24,13 @@ public class Player_Score : MonoBehaviour {
     {
         score = inScore;
         GameObject.FindGameObjectWithTag("UI_Score").GetComponent<UI_BuildIndicator>().setScoreIndicator(score);
-        print("Player Score set, now:" + score);
+        //print("Player Score set, now:" + score);
     }
 
     public void addScore(int inScore)
     {
         score += inScore;
         GameObject.FindGameObjectWithTag("UI_Score").GetComponent<UI_BuildIndicator>().setScoreIndicator(score);
-        print("Player Score changed, now:" + score);
+        //print("Player Score changed, now:" + score);
     }
 }

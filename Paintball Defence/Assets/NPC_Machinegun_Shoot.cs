@@ -29,7 +29,7 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 		downOvershoot = 0;
 		leftOvershoot = 0;
 		rightOvershoot = 0;
-		print("npc created");
+		//print("npc created");
 	}
 
 	// Update is called once per frame

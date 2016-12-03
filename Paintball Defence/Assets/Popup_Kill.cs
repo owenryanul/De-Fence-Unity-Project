@@ -9,7 +9,7 @@ public class Popup_Kill : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         AnimatorClipInfo[] clipInfo = popupTextAnimator.GetCurrentAnimatorClipInfo(0);
-        print("Spawned Popup");
+        //print("Spawned Popup");
         Destroy(this.gameObject, clipInfo[0].clip.length);
 
 	}
@@ -50,6 +50,6 @@ public class Popup_Kill : MonoBehaviour {
 
     void OnDestroy()
     {
-        print("Popup killed");
+        //print("Popup killed");
     }
 }

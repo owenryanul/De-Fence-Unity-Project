@@ -12,13 +12,17 @@ public class PopupText_Controller : MonoBehaviour {
     {
         pistollerScorePopup = Resources.Load<GameObject>("Score Popup Parent");
         costPopup = Resources.Load<GameObject>("Cost Popup Parent");
-        canvas = GameObject.Find("Canvas");
+        //canvas = GameObject.FindGameObjectWithTag("UI_Canvas");
+        canvas = GameObject.Find("UI_Canvas");
+        //print("Setupready");
     }
 
     public static void createPistollerScorePopup(Transform location)
     {
         GameObject instance = (GameObject)Instantiate(pistollerScorePopup);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
+        //print("Instance" + instance.name);
+        //print("Canvas:" + canvas.name);
         instance.transform.SetParent(canvas.transform, false);
         instance.transform.position = screenPosition;
     }

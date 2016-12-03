@@ -59,6 +59,7 @@ public class Player_Action : MonoBehaviour {
                 case 1: //shooting rifle
                     Instantiate(PlayerBullet, this.transform.position, PlayerBullet.transform.rotation);
                     shotCooldown = 0.5f;
+                    GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("Infinate");
                     break;
                 case 2: //shooting flamethrower
                     if (flamerthrowerAmmo > 0)
