@@ -61,14 +61,17 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 			if ((ClosestEnemy.transform.position - this.gameObject.transform.position).magnitude < range)
 			{
 				this.transform.LookAt (ClosestEnemy.transform);
-				if (!volleyCoolingDown) {
+				if (!volleyCoolingDown)
+                {
 					currentVolleyCooldown += Time.deltaTime;
-					if (currentVolleyCooldown >= volleyCooldown) {
+					if (currentVolleyCooldown >= volleyCooldown)
+                    {
 						volleyCoolingDown = true;
 						currentVolleyCooldown = 0;
 					}
 
-					if (shotCooldown <= 0) {
+					if (shotCooldown <= 0)
+                    {
 						shotCooldown = timeBetweenShots;
 						Instantiate (bullet, this.gameObject.transform.position, this.gameObject.transform.rotation);
 					} else {
