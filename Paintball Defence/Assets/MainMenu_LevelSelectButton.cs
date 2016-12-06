@@ -6,6 +6,7 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
 
     public GameObject[] MainMenuButtons;
     public GameObject[] LevelSelectMenuButtons;
+    public GameObject[] controlsMenu;
 
 
     public void enterLevelSelectScreen()
@@ -29,10 +30,40 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
 
     }
 
+    public void enterControlsScreen()
+    {
+        GameObject thisButton = GameObject.Find("Controls Button");
+        foreach (GameObject abutton in controlsMenu)
+        {
+            print("Activating abutton");
+            abutton.SetActive(true);
+        }
+
+        foreach (GameObject abutton in MainMenuButtons)
+        {
+            if (abutton.name != "Controls Button")
+            {
+                print("Shutting Down abutton");
+                abutton.SetActive(false);
+            }
+        }
+        thisButton.SetActive(false);
+
+    }
+
     public void backToMainMenu()
     {
+        GameObject thisButton = new GameObject();//placeholder contents
+        //find the currently active back button
+        foreach (GameObject abackButton in GameObject.FindGameObjectsWithTag("UI_BackButton"))
+        {
+            if(abackButton.activeSelf)
+            {
+                thisButton = abackButton;
+                break;
+            }
+        }
 
-        GameObject thisButton = GameObject.Find("Back Button");
         foreach (GameObject abutton in MainMenuButtons)
         {
             print("Activating abutton");
@@ -46,6 +77,16 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
                 print("Shutting Down abutton");
                 abutton.SetActive(false);
             }
+        }
+
+        foreach (GameObject aUIElement in controlsMenu)
+        {
+            if (aUIElement.name != "Back Button 2")
+            {
+                print("Shutting Down aUIElement");
+                aUIElement.SetActive(false);
+            }
+
         }
         thisButton.SetActive(false);
 
