@@ -54,6 +54,7 @@
      <Compile Include="Assets\Enemy2_Behaviour.cs" />
      <Compile Include="Assets\EnemyBulletMove.cs" />
      <Compile Include="Assets\Enemy_1_AI.cs" />
+     <Compile Include="Assets\Enemy_Audio.cs" />
      <Compile Include="Assets\Enemy_Bullet_Move.cs" />
      <Compile Include="Assets\Enemy_CollideWithBullet.cs" />
      <Compile Include="Assets\Enemy_Death.cs" />
@@ -89,6 +90,7 @@
      <Compile Include="Assets\UI_InsufficentFunds.cs" />
      <Compile Include="Assets\UI_Score_Indicator.cs" />
      <Compile Include="Assets\UI_Weapon_Indicator.cs" />
+     <Compile Include="Assets\audio_Death.cs" />
      <Compile Include="Assets\setupLevel.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />

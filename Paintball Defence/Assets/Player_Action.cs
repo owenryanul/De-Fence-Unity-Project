@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
 
 public class Player_Action : MonoBehaviour {
@@ -15,6 +16,9 @@ public class Player_Action : MonoBehaviour {
     public GameObject NPC_F_Pistoller;
     public GameObject NPC_MachineGunner;
     public GameObject NPC_F_MachineGunner;
+
+    public AudioClip shootSoundEffect;
+    private AudioSource soundSource;
 
     private GameObject currentGhost;
     private Vector3 targetVector;
@@ -41,6 +45,7 @@ public class Player_Action : MonoBehaviour {
         shotCooldown = 1;
         flamerthrowerAmmo = 0;
         shotgunAmmo = 0;
+        soundSource = this.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -59,6 +64,7 @@ public class Player_Action : MonoBehaviour {
                 case 1: //shooting rifle
                     Instantiate(PlayerBullet, this.transform.position, PlayerBullet.transform.rotation);
                     shotCooldown = 0.5f;
+                    soundSource.PlayOneShot(shootSoundEffect);
                     GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("Infinate");
                     break;
                 case 2: //shooting flamethrower

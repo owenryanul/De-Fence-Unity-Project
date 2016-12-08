@@ -4,18 +4,19 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	private Collider[] LevelBounds;
+    private float speed;
 
 	// Use this for initialization
 	void Start () {
         LevelBounds = GameObject.FindGameObjectWithTag("Level").GetComponentsInChildren<BoxCollider>();
-		//LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
+        //LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
+        speed = 0.2f;
 	}
 		
 
 	// Update is called once per frame
 	void Update () 
 	{
-		float speed = 0.2f;
 		Vector3 move = new Vector3 (0, 0, 0);
 		//move Up
 		if (Input.GetKey(KeyCode.UpArrow)) 

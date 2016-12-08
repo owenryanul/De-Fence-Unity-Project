@@ -8,6 +8,10 @@ public class Enemy_1_AI : MonoBehaviour {
 	// Use this for initialization
     private float topSpeed;
     private float speed;
+    private float soundCooldown;
+    public AudioClip grrSound;
+    private AudioSource soundSource;
+
 	void Start () {
         //bulletCooldown = 5;
         topSpeed = 1.0f;
