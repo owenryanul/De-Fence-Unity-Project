@@ -4,7 +4,10 @@ using System.Collections;
 public class NPC_Shoot : MonoBehaviour {
 
 	public Transform bullet;
-	private bool isFollower;
+    public AudioClip shootSoundEffect;
+
+    private AudioSource soundSource;
+    private bool isFollower;
 	private float shotCooldown;
 	private Collider LevelBounds;
     private float scoreCooldown;
@@ -16,6 +19,8 @@ public class NPC_Shoot : MonoBehaviour {
 		isFollower = false;
 		LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
 		print("npc created");
+
+        soundSource = this.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -51,6 +56,7 @@ public class NPC_Shoot : MonoBehaviour {
 				{
 					shotCooldown = 5;
 					Instantiate (bullet, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                    soundSource.PlayOneShot(shootSoundEffect);
 				} 
 				else
 				{

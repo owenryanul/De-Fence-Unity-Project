@@ -18,6 +18,12 @@ public class Player_Action : MonoBehaviour {
     public GameObject NPC_F_MachineGunner;
 
     public AudioClip shootSoundEffect;
+    public AudioClip shootFlamethrowerSoundEffect;
+    public AudioClip shootShotgunSoundEffect;
+    public AudioClip placeBuildingSoundEffect;
+    public AudioClip placeNPCSoundEffect;
+    public AudioClip placeFollowerSoundEffect;
+    public AudioClip noFundsSoundEffect;
     private AudioSource soundSource;
 
     private GameObject currentGhost;
@@ -70,6 +76,7 @@ public class Player_Action : MonoBehaviour {
                 case 2: //shooting flamethrower
                     if (flamerthrowerAmmo > 0)
                     {
+                        soundSource.PlayOneShot(shootFlamethrowerSoundEffect);
                         Instantiate(PlayerFlamethrowerBullet, this.transform.position, PlayerBullet.transform.rotation);
                         shotCooldown = 0.01f;
                         flamerthrowerAmmo--;
@@ -83,6 +90,7 @@ public class Player_Action : MonoBehaviour {
                         {
                             Instantiate(PlayerShotgunBullet, this.transform.position, PlayerBullet.transform.rotation);
                         }
+                        soundSource.PlayOneShot(shootShotgunSoundEffect);
                         shotCooldown = 1f;
                         shotgunAmmo--;
                         GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + shotgunAmmo);
@@ -90,7 +98,7 @@ public class Player_Action : MonoBehaviour {
                     break;
             }
         }
-        //building/reloading
+        //!!!!!building/reloading
         else if (Input.GetMouseButtonDown(1))
         {
             if (hotbar == 0)
@@ -98,30 +106,36 @@ public class Player_Action : MonoBehaviour {
                 switch (buildMode)
                 {
                     case 2:
+                        //purchase pistollier as follower (npc that follows and shoots with the player)
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
                             if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
                             {
                                 Instantiate(NPC_F_Pistoller, targetVector, NPC_F_Pistoller.transform.rotation);
+                                soundSource.PlayOneShot(placeFollowerSoundEffect);
                                 this.gameObject.GetComponent<Player_Score>().addScore(-300);
                                 PopupText_Controller.createCostPopup(targetVector, 300);
                             }
                             else
                             {
                                 GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                                soundSource.PlayOneShot(noFundsSoundEffect);
                             }
                         }
+                        //purchase pistollier as guard(stationary npc that shoots enemies)
                         else
                         {
                             if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
                             {
                                 Instantiate(NPC_Pistoller, targetVector, NPC_Pistoller.transform.rotation);
+                                soundSource.PlayOneShot(placeNPCSoundEffect);
                                 this.gameObject.GetComponent<Player_Score>().addScore(-300);
                                 PopupText_Controller.createCostPopup(targetVector, 300);
                             }
                             else
                             {
                                 GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                                soundSource.PlayOneShot(noFundsSoundEffect);
                             }
                         }
                         break;
@@ -129,16 +143,18 @@ public class Player_Action : MonoBehaviour {
                     case 3:
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
-                            
+
                             if (this.gameObject.GetComponent<Player_Score>().getScore() >= 800)
                             {
                                 Instantiate(NPC_F_MachineGunner, targetVector, NPC_F_MachineGunner.transform.rotation);
+                                soundSource.PlayOneShot(placeFollowerSoundEffect);
                                 this.gameObject.GetComponent<Player_Score>().addScore(-800);
                                 PopupText_Controller.createCostPopup(targetVector, 800);
                             }
                             else
                             {
                                 GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                                soundSource.PlayOneShot(noFundsSoundEffect);
                             }
                         }
                         else
@@ -146,18 +162,20 @@ public class Player_Action : MonoBehaviour {
                             if (this.gameObject.GetComponent<Player_Score>().getScore() >= 800)
                             {
                                 Instantiate(NPC_MachineGunner, targetVector, NPC_MachineGunner.transform.rotation);
+                                soundSource.PlayOneShot(placeNPCSoundEffect);
                                 this.gameObject.GetComponent<Player_Score>().addScore(-800);
                                 PopupText_Controller.createCostPopup(targetVector, 800);
                             }
                             else
                             {
                                 GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                                soundSource.PlayOneShot(noFundsSoundEffect);
                             }
                         }
                         break;
 
                     case 4:
-                        
+
                         if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
                         {
                             currentGhost = (GameObject)Instantiate(GhostBarricade, targetVector, GhostBarricade.transform.rotation);
@@ -168,6 +186,7 @@ public class Player_Action : MonoBehaviour {
                         else
                         {
                             GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            soundSource.PlayOneShot(noFundsSoundEffect);
                         }
                         break;
 
@@ -182,31 +201,35 @@ public class Player_Action : MonoBehaviour {
                         else
                         {
                             GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            soundSource.PlayOneShot(noFundsSoundEffect);
                         }
                         break;
                 }
             }
-            else if (hotbar == 1)//weapon hotbar
+            //purchasing ammo
+            else if (hotbar == 1)// hotbar 1 = weapon hotbar
             {
-                switch(currentWeapon)
+                switch (currentWeapon)
                 {
                     case 1:
-                            //rifle, basic starting weapon
+                        //rifle, basic starting weapon
                         break;
                     case 2:
                         //flamethrower ammo purchasing
-                            if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
-                            {
-                                flamerthrowerAmmo += 100;
-                                GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
-                                this.gameObject.GetComponent<Player_Score>().addScore(-300);
-                                PopupText_Controller.createCostPopup(this.transform, 300);
-                                print("Flamer ammo purchased, new ammo: " + flamerthrowerAmmo + ", new score: " + this.gameObject.GetComponent<Player_Score>().getScore());
-                            }
-                            else
-                            {
-                                GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
-                            }
+                        if (this.gameObject.GetComponent<Player_Score>().getScore() >= 300)
+                        {
+                            flamerthrowerAmmo += 100;
+                            GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + flamerthrowerAmmo);
+                            this.gameObject.GetComponent<Player_Score>().addScore(-300);
+                            PopupText_Controller.createCostPopup(this.transform, 300);
+                            soundSource.PlayOneShot(placeNPCSoundEffect);
+                            //print("Flamer ammo purchased, new ammo: " + flamerthrowerAmmo + ", new score: " + this.gameObject.GetComponent<Player_Score>().getScore());
+                        }
+                        else
+                        {
+                            GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            soundSource.PlayOneShot(noFundsSoundEffect);
+                        }
                         break;
                     case 3:
                         //shotgun ammo purchasing
@@ -216,17 +239,19 @@ public class Player_Action : MonoBehaviour {
                             GameObject.FindGameObjectWithTag("UI_AmmoIndicator").GetComponent<UI_BuildIndicator>().setAmmoIndicator("" + shotgunAmmo);
                             this.gameObject.GetComponent<Player_Score>().addScore(-200);
                             PopupText_Controller.createCostPopup(this.transform, 200);
-                            print("Shotgun ammo purchased, new ammo: " + shotgunAmmo + ", new score: " + this.gameObject.GetComponent<Player_Score>().getScore());
+                            soundSource.PlayOneShot(placeNPCSoundEffect);
+                            //print("Shotgun ammo purchased, new ammo: " + shotgunAmmo + ", new score: " + this.gameObject.GetComponent<Player_Score>().getScore());
                         }
                         else
                         {
                             GameObject.FindGameObjectWithTag("UI_Warning").GetComponent<UI_InsufficentFunds>().showWarning();
+                            soundSource.PlayOneShot(noFundsSoundEffect);
                         }
                         break;
                 }
             }
         }
-
+        //releasing the mouse to finalise the purchase of a building
         if (Input.GetMouseButtonUp(1) && currentlyBuilding)
         {
             //print("Building " + buildMode);
@@ -235,11 +260,13 @@ public class Player_Action : MonoBehaviour {
                 case 4://placing barricade, showing ghost
                     //print("starting to Building");
                     Instantiate(Barricade, currentGhost.transform.position, currentGhost.transform.rotation);
+                    soundSource.PlayOneShot(placeBuildingSoundEffect);
                     //print("Finished Building");
                         break;
 
                 case 5: //placing wall, showing ghost
                     Instantiate(Wall, currentGhost.transform.position, currentGhost.transform.rotation);
+                    soundSource.PlayOneShot(placeBuildingSoundEffect);
                     break;
             }
             currentlyBuilding = false;

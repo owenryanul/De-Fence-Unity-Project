@@ -5,6 +5,8 @@ public class Enemy_Shooter_AI: MonoBehaviour {
 
 	public GameObject EnemyBullet;
     public bool isTargetDummy;
+    public AudioClip shootSoundEffect;
+    private AudioSource soundSource;
 	private float AimingTimeRemaining;
 	private float spitCooldown;
     private float speed;
@@ -24,6 +26,7 @@ public class Enemy_Shooter_AI: MonoBehaviour {
         }
         speed = topSpeed;
         maxRange = 12;
+        soundSource = this.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -50,6 +53,7 @@ public class Enemy_Shooter_AI: MonoBehaviour {
 				AimingTimeRemaining = 3;
 				spitCooldown = 5;
 				Instantiate (EnemyBullet, this.transform.position, this.transform.rotation);
+                soundSource.PlayOneShot(shootSoundEffect);
 			} else {
 				//print ("Aiming");
 				AimingTimeRemaining -= Time.deltaTime;

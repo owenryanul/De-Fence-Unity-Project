@@ -44,7 +44,7 @@ public class SpawnEnemies : MonoBehaviour {
                         {
                             if (mobMembersYetToSpawn > 0)//spawn individual members of the mob with a 1 second delay
                             {
-                                print("Enemy Mob Spawned");
+                                //print("Enemy Mob Spawned");
                                 Instantiate(enemy, mobSpawnpoint, enemy.transform.rotation);
                                 mobMemberCooldown = 2;
                                 mobMembersYetToSpawn--;
@@ -71,24 +71,24 @@ public class SpawnEnemies : MonoBehaviour {
                 else//spawn random type of enemy
                 {
                     int thing = Random.Range(0, 3);//Documentation says max inclusive, but is acting exclusive
-                    print(thing);
+                    //print(thing);
                     switch (thing)
                     {
                         case 1:
                             Instantiate(enemy_exploder, spawnpoint, enemy.transform.rotation);
-                            print("Enemy Exploder Spawned");
+                            //print("Enemy Exploder Spawned");
                             mobCooldown--;
                             break;
 
                         case 2:
                             Instantiate(enemy_shooter, spawnpoint, enemy.transform.rotation);
-                            print("Enemy Shooter Spawned");
+                            //print("Enemy Shooter Spawned");
                             mobCooldown--;
                             break;
 
                         default: 
                             Instantiate(enemy, spawnpoint, enemy.transform.rotation);
-                            print("Enemy Spawned");
+                            //print("Enemy Spawned");
                             mobCooldown--;
                             break;
                     }

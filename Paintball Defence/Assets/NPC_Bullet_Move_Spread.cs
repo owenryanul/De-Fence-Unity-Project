@@ -101,7 +101,7 @@ public class NPC_Bullet_Move_Spread : MonoBehaviour {
                 //if the barrier is the barrier of a tank enemy, inflict damage on the barrier before destroying the bullet.
                 if (col.tag == "EnemyTank_Barrier")
                 {
-                    print("Detected Enemy Tank Barrier");
+                    //print("Detected Enemy Tank Barrier");
                     col.gameObject.GetComponent<Enemy_Tank_BarrierDamage>().damageBarrier();
                 }
                 Destroy (this.gameObject);

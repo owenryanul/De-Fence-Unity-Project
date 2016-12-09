@@ -10,8 +10,8 @@ public class NPC_Follower : MonoBehaviour {
 		private Collider LevelBounds;
 		private float leftOvershoot;
 		private float rightOvershoot;
-	private float upOvershoot;
-	private float downOvershoot;
+	    private float upOvershoot;
+	    private float downOvershoot;
 
 		// Use this for initialization
 		void Start () {

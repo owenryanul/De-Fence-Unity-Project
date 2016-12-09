@@ -19,7 +19,7 @@ public class Enemy_Tank_BarrierDamage : MonoBehaviour {
 
     public void damageBarrier()
     {
-        print("Barrier Damaged");
+        //print("Barrier Damaged");
         barrierHealth--;
         Instantiate(damageEffectEmitter, this.gameObject.transform.position, new Quaternion(0, 180, 180, 0));
         if (barrierHealth <= 0)

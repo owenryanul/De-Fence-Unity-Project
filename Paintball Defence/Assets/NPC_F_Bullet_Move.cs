@@ -54,7 +54,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
 			GameObject[] coverAreas = GameObject.FindGameObjectsWithTag ("Cover_Area");
 			foreach (GameObject aCoverArea in coverAreas) {
 				if (aCoverArea.GetComponent<Collider> ().bounds.Contains (this.transform.position)) {
-					print ("adding cover area to ignore list");
+					//print ("adding cover area to ignore list");
 					coverToIgnore.Add (aCoverArea.transform.parent.GetChild (0).gameObject);//the barrier part of the cover.
 				}
 			}
@@ -78,7 +78,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-		print("collision in");
+		//print("collision in");
 		if (col.tag == "Enemy") 
 		{
             col.gameObject.GetComponent<Enemy_Death>().killEnemy();
@@ -92,7 +92,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
 			{
 				if (acover.GetInstanceID() == col.gameObject.GetInstanceID()) 
 				{
-					print("ignoring this collision");
+					//print("ignoring this collision");
 					ignorethisCollision = true;
 					break;
 				}
@@ -104,7 +104,7 @@ public class NPC_F_Bullet_Move : MonoBehaviour {
                 //if the barrier is the barrier of a tank enemy, inflict damage on the barrier before destroying the bullet.
                 if (col.tag == "EnemyTank_Barrier")
                 {
-                    print("Detected Enemy Tank Barrier");
+                    //print("Detected Enemy Tank Barrier");
                     col.gameObject.GetComponent<Enemy_Tank_BarrierDamage>().damageBarrier();
                 }
                 Destroy (this.gameObject);

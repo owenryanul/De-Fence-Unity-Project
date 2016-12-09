@@ -5,6 +5,8 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 
 	public GameObject bullet;
 	public GameObject followerBullet;
+    public AudioClip shootSound;
+    private AudioSource soundSource;
 	public bool isFollower;
 	private float shotCooldown;
 	public float timeBetweenShots;
@@ -18,6 +20,7 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 	private float rightOvershoot;
 	private float upOvershoot;
 	private float downOvershoot;
+    private float soundCooldown;//time between sound effects when firing the machine as a follower.
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +32,9 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 		downOvershoot = 0;
 		leftOvershoot = 0;
 		rightOvershoot = 0;
-		//print("npc created");
+        //print("npc created");
+        soundSource = this.GetComponent<AudioSource>();
+        soundCooldown = 0;
 	}
 
 	// Update is called once per frame
@@ -63,6 +68,11 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 				this.transform.LookAt (ClosestEnemy.transform);
 				if (!volleyCoolingDown)
                 {
+                    if(currentVolleyCooldown == 0)//fire shot of the volley
+                    {
+                        soundSource.PlayOneShot(shootSound);
+                    }
+
 					currentVolleyCooldown += Time.deltaTime;
 					if (currentVolleyCooldown >= volleyCooldown)
                     {
@@ -190,8 +200,14 @@ public class NPC_Machinegun_Shoot : MonoBehaviour {
 			//smokeEmit.Play ();
 			Instantiate (followerBullet, this.transform.position, followerBullet.transform.rotation);
 			shotCooldown = timeBetweenShots;
-		}
+            if (soundCooldown <= 0)//fire shot of the volley
+            {
+                soundSource.PlayOneShot(shootSound);
+                soundCooldown = 0.5f;
+            }
+        }
 		shotCooldown -= Time.deltaTime;
+        soundCooldown -= Time.deltaTime;
 
 
         //----Look at Player Aim----
