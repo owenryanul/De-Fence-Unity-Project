@@ -11,6 +11,7 @@ public class NPC_Shoot : MonoBehaviour {
 	private float shotCooldown;
 	private Collider LevelBounds;
     private float scoreCooldown;
+    private Canvas thisCanvas;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class NPC_Shoot : MonoBehaviour {
 		LevelBounds = GameObject.FindGameObjectWithTag ("Level").GetComponent<BoxCollider>();
 		print("npc created");
 
+        thisCanvas = this.GetComponentInChildren<Canvas>();
         soundSource = this.GetComponent<AudioSource>();
 	}
 	
@@ -70,7 +72,7 @@ public class NPC_Shoot : MonoBehaviour {
         {
             scoreCooldown = 1;
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Score>().addScore(10);
-            PopupText_Controller.createPistollerScorePopup(this.transform);
+            PopupText_Controller.createPistollerScorePopup(thisCanvas);
         }
         else
         {

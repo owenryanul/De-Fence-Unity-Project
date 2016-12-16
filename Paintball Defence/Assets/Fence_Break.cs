@@ -35,8 +35,7 @@ public class Fence_Break : MonoBehaviour {
                     case 2: Instantiate(shooterTank, fenceToBreak.transform.position, rotationOfTank); break;
                     default: Instantiate(tank, fenceToBreak.transform.position, rotationOfTank); break;
                 }
-                Instantiate(tank, fenceToBreak.transform.position, rotationOfTank);
-
+                
                 //Destory the fence we're removing
                 Destroy(fenceToBreak);
             }

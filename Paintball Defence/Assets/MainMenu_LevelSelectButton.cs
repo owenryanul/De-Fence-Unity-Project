@@ -7,6 +7,7 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
     public GameObject[] MainMenuButtons;
     public GameObject[] LevelSelectMenuButtons;
     public GameObject[] controlsMenu;
+    public GameObject[] aboutMenu;
 
 
     public void enterLevelSelectScreen()
@@ -30,6 +31,8 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
 
     }
 
+
+
     public void enterControlsScreen()
     {
         GameObject thisButton = GameObject.Find("Controls Button");
@@ -42,6 +45,27 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
         foreach (GameObject abutton in MainMenuButtons)
         {
             if (abutton.name != "Controls Button")
+            {
+                print("Shutting Down abutton");
+                abutton.SetActive(false);
+            }
+        }
+        thisButton.SetActive(false);
+
+    }
+
+    public void enterAboutScreen()
+    {
+        GameObject thisButton = GameObject.Find("About Button");
+        foreach (GameObject abutton in aboutMenu)
+        {
+            print("Activating abutton");
+            abutton.SetActive(true);
+        }
+
+        foreach (GameObject abutton in MainMenuButtons)
+        {
+            if (abutton.name != "About Button")
             {
                 print("Shutting Down abutton");
                 abutton.SetActive(false);
@@ -88,6 +112,16 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
             }
 
         }
+
+        foreach (GameObject aUIElement in aboutMenu)
+        {
+            if (aUIElement.name != "Back Button 3")
+            {
+                print("Shutting Down aUIElement");
+                aUIElement.SetActive(false);
+            }
+
+        }
         thisButton.SetActive(false);
 
     }
@@ -98,6 +132,8 @@ public class MainMenu_LevelSelectButton : MonoBehaviour {
         {
             case 1: SceneManager.LoadScene("Test_Scene", LoadSceneMode.Single); break;
             case 2: SceneManager.LoadScene("Level_2", LoadSceneMode.Single); break;
+            case 3: SceneManager.LoadScene("Level_3", LoadSceneMode.Single); break;
+            case 4: SceneManager.LoadScene("Level_4", LoadSceneMode.Single); break;
         }
     }
 

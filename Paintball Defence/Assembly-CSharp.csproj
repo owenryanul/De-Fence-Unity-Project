@@ -65,6 +65,7 @@
      <Compile Include="Assets\Enemy_Tank_BarrierDamage.cs" />
      <Compile Include="Assets\Exit_To_Menu.cs" />
      <Compile Include="Assets\Fence_Break.cs" />
+     <Compile Include="Assets\FixChildRotation.cs" />
      <Compile Include="Assets\GhostCoverFaceMouse.cs" />
      <Compile Include="Assets\HideShowCoverBox.cs" />
      <Compile Include="Assets\MainMenu_LevelSelectButton.cs" />

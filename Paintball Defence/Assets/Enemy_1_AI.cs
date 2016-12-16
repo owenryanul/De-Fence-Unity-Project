@@ -31,7 +31,7 @@ public class Enemy_1_AI : MonoBehaviour {
 	void Update () 
 	{
 		//float speed = topSpeed;
-        if(timeSinceLastCheck >= 1)
+        if(timeSinceLastCheck >= 1 || ClosestTarget == null)
         {
             timeSinceLastCheck = 0;
             findClosestTarget();

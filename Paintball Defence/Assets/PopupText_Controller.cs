@@ -17,14 +17,14 @@ public class PopupText_Controller : MonoBehaviour {
         //print("Setupready");
     }
 
-    public static void createPistollerScorePopup(Transform location)
+    public static void createPistollerScorePopup(Canvas aCanvas)
     {
         GameObject instance = (GameObject)Instantiate(pistollerScorePopup);
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
+        //Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
         //print("Instance" + instance.name);
         //print("Canvas:" + canvas.name);
-        instance.transform.SetParent(canvas.transform, false);
-        instance.transform.position = screenPosition;
+        instance.transform.SetParent(aCanvas.transform, false);
+        //instance.transform.position = screenPosition;
     }
 
     public static void createCostPopup(Transform location, int cost)
